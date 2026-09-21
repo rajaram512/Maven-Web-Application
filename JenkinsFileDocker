@@ -55,7 +55,7 @@ pipeline
         {
             steps()
             {
-                sshagent(['DeploymentServer_SSH']
+                sshagent(['DeploymentServer_SSH'])
                 //{
                 //sshagent(credentials: ['DeploymentServer_SSH'], executable: '') 
                 {
