@@ -13,7 +13,7 @@ pipeline
     {
         stage('Checkout from Github')
         {
-            step()
+            steps()
             {
             git branch: 'DevopsAyg2026', url:'https://github.com/rajaram512/Maven-Web-Application.git'
             } 
