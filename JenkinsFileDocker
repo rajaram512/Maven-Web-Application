@@ -41,7 +41,7 @@ pipeline
                     sh 'docker login -u rajalearn1 -p ${Docker_Hub_Password}'
                 }
                 sh 'docker push rajalearn1/maven-service:${buildNumber}'
-}
+
             }
         } 
         stage ('Delete Docker image locally ')
