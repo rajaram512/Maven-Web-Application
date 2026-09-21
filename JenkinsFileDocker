@@ -14,7 +14,7 @@ pipeline
 
     stages
     {
-        stage('Checkout Code to Jenkins from GitHub')
+        stage('Checkout Code to Jenkins from GitHub repo')
         {
             steps()
             {
