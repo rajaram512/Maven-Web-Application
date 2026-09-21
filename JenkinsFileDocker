@@ -1,0 +1,55 @@
+pipeline
+{
+    agent any 
+    tools
+    {
+        maven 'Maven_3.9.11'
+    }
+    environment
+    {
+        buildNumber="${BUILD_NUMBER}" 
+    }
+    stages
+    {
+        stage('Checkout from Github')
+        {
+            step()
+            {
+            git branch: 'DevopsAyg2026', url:'https://github.com/rajaram512/Maven-Web-Application.git'
+            } 
+        }
+        stage ('Build Artifact')
+        {
+            steps()
+            {
+                sh 'mvn clean package'
+            }
+        } 
+         stage ('Build Docker Image')
+        {
+            steps()
+            {
+                sh 'docker build -t rajalearn1/maven-service:${buildNumber} .'
+            }
+        }
+         stage ('Authenticate and push docker image to docker hub ')
+        {
+            steps()
+            {
+                withCredentials([string(credentialsId: 'Docker_Hub_Password', variable: 'Docker_Hub_Password')])
+                {
+                    sh 'docker login -u rajalearn1 -p ${Docker_Hub_Password}'
+                }
+                sh 'docker push rajalearn1/maven-service:${buildNumber}'
+}
+            }
+        } 
+        stage ('Delete Docker image locally ')
+        {
+            steps()
+            {
+                sh 'docker rmi rajalearn1/maven-service:${buildNumber} .'
+            }
+        }  
+    }
+}
