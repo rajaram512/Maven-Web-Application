@@ -11,7 +11,7 @@ pipeline
     }
     stages
     {
-        stage('Checkout from Githubrepooooo')
+        stage('Checkout from Github Repository')
         {
             steps()
             {
