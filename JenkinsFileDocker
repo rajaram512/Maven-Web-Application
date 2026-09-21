@@ -50,6 +50,19 @@ pipeline
             {
                 sh 'docker rmi rajalearn1/maven-service:${buildNumber}'
             }
-        }  
+        } 
+        stage ('Deploy Application to Docker Deployment Server')
+        {
+            steps()
+            {
+                sshagent(['DeploymentServer_SSH']
+                //{
+                //sshagent(credentials: ['DeploymentServer_SSH'], executable: '') 
+                {
+                 sh "ssh -o StrictHostKeyChecking=np root@172.31.1.200 docker rm -f maven-container || true"
+                 sh "ssh -o StrictHostKeyChecking=np root@172.31.1.200 docker run --name maven-container -p 8080:8080 rajalearn1/maven-service:${buildNumber}"  
+                 }
+            }
+        } 
     }
 }
