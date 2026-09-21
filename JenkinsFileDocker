@@ -48,7 +48,7 @@ pipeline
         {
             steps()
             {
-                sh 'docker rmi rajalearn1/maven-service:${buildNumber} .'
+                sh 'docker rmi rajalearn1/maven-service:${buildNumber}'
             }
         }  
     }
